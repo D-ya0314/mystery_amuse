@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>忘れられた遊園地 謎解き</title>
+    <style>
+      body {
+        background: #000;
+        color: #0f0;
+        font-family: monospace;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      #parkView {
+        text-align: center;
+        margin: 20px;
+      }
+      #parkView button {
+        background: #222;
+        border: 1px solid #0f0;
+        color: #0f0;
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 8px;
+        min-width: 140px;
+      }
+      #parkView button:disabled {
+        color: #050;
+        border-color: #050;
+        cursor: not-allowed;
+        background: #101010;
+      }
+      #phone {
+        background: #222;
+        border-radius: 20px;
+        width: 320px;
+        padding: 20px;
+        box-shadow: 0 0 20px #0f0;
+        display: none;
+        user-select: none;
+      }
+      .phone_screen {
+        background: #000;
+        border: 2px solid #0f0;
+        padding: 15px;
+        height: 160px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        white-space: pre-wrap;
+        overflow-y: auto;
+      }
+      .phone_input {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #0ff;
+        font-size: 18px;
+        letter-spacing: 8px;
+        user-select: text;
+      }
+      .phone_navpad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        margin-bottom: 10px;
+        justify-items: center;
+      }
+      .phone_keypad {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .phone_btn {
+        background: #111;
+        border: 1px solid #0f0;
+        color: #0f0;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        min-width: 50px;
+        user-select: none;
+        font-size: 14px;
+        line-height: 1.2;
+      }
+      .phone_spacer {
+        visibility: hidden;
+      }
+      #btn-closePhone {
+        margin-top: 10px;
+        background: #111;
+        border: 1px solid #0f0;
+        color: #0f0;
+        padding: 8px 14px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+      #message {
+        margin-top: 10px;
+        min-height: 24px;
+        color: #0f0;
+        font-weight: bold;
+        user-select: none;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="parkView">
+      <h2>廃墟の遊園地</h2>
+      <button id="btn-merry" disabled>メリーゴーランド</button>
+      <button id="btn-haunted" disabled>お化け屋敷</button>
+      <button id="btn-ferris" disabled>観覧車</button>
+      <br />
+      <button id="btn-openPhone">ガラケーを開く</button>
+    </div>
+
+    <div id="phone">
+      <div class="phone_screen" id="screen"></div>
+      <div>入力: <span class="phone_input" id="input">_ _ _ _ _</span></div>
+
+      <div class="phone_navpad">
+        <div class="phone_btn" id="btn-convert">変換</div>
+        <div class="phone_btn" id="btn-up">▲</div>
+        <div class="phone_spacer"></div>
+        <div class="phone_btn" id="btn-left">◀</div>
+        <div class="phone_btn" id="btn-enter">ENTER</div>
+        <div class="phone_btn" id="btn-right">▶</div>
+        <div class="phone_btn" id="btn-clear">クリア</div>
+        <div class="phone_btn" id="btn-down">▼</div>
+        <div class="phone_btn" id="btn-clear-all">全消し</div>
+      </div>
+
+      <div class="phone_keypad" id="keypad">
+        <div class="phone_btn" data-key="1">1あ</div>
+        <div class="phone_btn" data-key="2">2か<br />abc</div>
+        <div class="phone_btn" data-key="3">3さ<br />def</div>
+        <div class="phone_btn" data-key="4">4た<br />ghi</div>
+        <div class="phone_btn" data-key="5">5な<br />jkl</div>
+        <div class="phone_btn" data-key="6">6は<br />mno</div>
+        <div class="phone_btn" data-key="7">7ま<br />pqrs</div>
+        <div class="phone_btn" data-key="8">8や<br />tuv</div>
+        <div class="phone_btn" data-key="9">9ら<br />wxyz</div>
+        <div class="phone_btn" data-key="a">＊<br />.-</div>
+        <div class="phone_btn" data-key="0">0わ<br />!?</div>
+        <div class="phone_btn" data-key="b">#<br />,_[]</div>
+      </div>
+    </div>
+    <button id="btn-closePhone">閉じる</button>
+    <div id="message"></div>
+
+    <script>
+      // 謎と答え
+      const puzzles = [
+        {
+          question: "この謎を解けば、この世界が動き出す。\n2×1 6×1 8×2 7×4 3×2",
+          answer: "amuse",
+        },
+        {
+          question:
+            "①当時祭られていた動物は？\n②今から12時間後はひつじ、20時間後は？\n\n①②へ向かえ",
+          answer: "とりい",
+        },
+        {
+          question: "鳥居に貼られた謎を解け\n\n答えは、◇のなか",
+          answer: "いのなか",
+        },
+        { question: "最終問題：abcの次は？", answer: "d" },
+      ];
+
+      // キー入力文字群
+      const keyMap = {
+        alphabet: {
+          2: ["a", "b", "c"],
+          3: ["d", "e", "f"],
+          4: ["g", "h", "i"],
+          5: ["j", "k", "l"],
+          6: ["m", "n", "o"],
+          7: ["p", "q", "r", "s"],
+          8: ["t", "u", "v"],
+          9: ["w", "x", "y", "z"],
+          a: [".", "-"],
+          0: ["!", "?"],
+          b: [",", "_", "[", "]"],
+        },
+        number: {
+          1: ["1"],
+          2: ["2"],
+          3: ["3"],
+          4: ["4"],
+          5: ["5"],
+          6: ["6"],
+          7: ["7"],
+          8: ["8"],
+          9: ["9"],
+          a: ["*"],
+          0: ["0"],
+          b: ["#"],
+        },
+        hiragana: {
+          1: ["あ", "い", "う", "え", "お"],
+          2: ["か", "き", "く", "け", "こ"],
+          3: ["さ", "し", "す", "せ", "そ"],
+          4: ["た", "ち", "つ", "て", "と"],
+          5: ["な", "に", "ぬ", "ね", "の"],
+          6: ["は", "ひ", "ふ", "へ", "ほ"],
+          7: ["ま", "み", "む", "め", "も"],
+          8: ["や", "ゆ", "よ"],
+          9: ["ら", "り", "る", "れ", "ろ"],
+          a: [""],
+          0: ["わ", "を", "ん", "ー"],
+          b: [""],
+        },
+      };
+
+      // 状態変数
+      let currentPuzzle = 0;
+      let inputMode = "alphabet"; // alphabet, number, hiragana
+      let input = Array(5).fill("");
+      let currentKey = null;
+      let pressCount = 0;
+      let pressTimeout;
+      let cursor = 0;
+
+      // 施設解放状態管理
+      const unlockedAreas = new Set();
+
+      // DOM
+      const parkView = document.getElementById("parkView");
+      const phone = document.getElementById("phone");
+      const btnOpenPhone = document.getElementById("btn-openPhone");
+      const btnClosePhone = document.getElementById("btn-closePhone");
+      const btnMerry = document.getElementById("btn-merry");
+      const btnHaunted = document.getElementById("btn-haunted");
+      const btnFerris = document.getElementById("btn-ferris");
+      const screenEl = document.getElementById("screen");
+      const inputEl = document.getElementById("input");
+      const messageEl = document.getElementById("message");
+
+      // 表示更新
+      function updateScreen() {
+        screenEl.textContent = puzzles[currentPuzzle].question;
+        updateInput();
+      }
+
+      function updateInput() {
+        const display = input
+          .map((c, i) => (i === cursor ? `[${c || "_"}]` : c || "_"))
+          .join(" ");
+        inputEl.textContent = display;
+      }
+
+      // キー処理
+      function handleKeyPress(key) {
+        if (!(key in keyMap[inputMode])) return;
+
+        if (key !== currentKey) {
+          confirmChar();
+          currentKey = key;
+          pressCount = 1;
+        } else {
+          pressCount++;
+        }
+        showTempChar(key);
+
+        clearTimeout(pressTimeout);
+        pressTimeout = setTimeout(() => {
+          confirmChar();
+        }, 500);
+      }
+
+      function showTempChar(key) {
+        const chars = keyMap[inputMode][key];
+        const char = chars[(pressCount - 1) % chars.length];
+        input[cursor] = char;
+        updateInput();
+      }
+
+      function confirmChar() {
+        if (currentKey !== null) {
+          const chars = keyMap[inputMode][currentKey];
+          const char = chars[(pressCount - 1) % chars.length];
+          input[cursor] = char;
+          cursor = Math.min(cursor + 1, input.length - 1);
+          updateInput();
+        }
+        currentKey = null;
+        pressCount = 0;
+      }
+
+      function deleteChar() {
+        input[cursor] = "";
+        updateInput();
+      }
+
+      function clearAll() {
+        input = Array(5).fill("");
+        cursor = 0;
+        updateInput();
+      }
+
+      function moveCursor(direction) {
+        if (direction === "left") cursor = Math.max(0, cursor - 1);
+        else if (direction === "right")
+          cursor = Math.min(input.length - 1, cursor + 1);
+        // up/down未使用
+        updateInput();
+      }
+
+      function toggleInputMode() {
+        const modes = ["alphabet", "number", "hiragana"];
+        const currentIndex = modes.indexOf(inputMode);
+        inputMode = modes[(currentIndex + 1) % modes.length];
+        messageEl.textContent = `入力モード: ${inputMode}`;
+        setTimeout(() => {
+          messageEl.textContent = "";
+        }, 1500);
+      }
+
+      function submitAnswer() {
+        confirmChar();
+        const guess = input.join("");
+        if (guess === puzzles[currentPuzzle].answer) {
+          messageEl.textContent = "正解！";
+
+          // 施設解放処理
+          if (currentPuzzle === 0) unlockedAreas.add("merry");
+          else if (currentPuzzle === 1) unlockedAreas.add("haunted");
+          else if (currentPuzzle === 3) unlockedAreas.add("ferris");
+
+          updateParkButtons();
+
+          setTimeout(() => {
+            // 謎進行処理
+            if (currentPuzzle === 0) {
+              messageEl.textContent =
+                "遊園地のゲートが開き、メリーゴーランドが動き出した！\nガラケーに次の謎が表示された。";
+              currentPuzzle++;
+              resetInput();
+              updateScreen();
+            } else if (currentPuzzle === 1) {
+              messageEl.textContent = "鳥居に向かおう。";
+              currentPuzzle++;
+              resetInput();
+              updateScreen();
+            } else if (currentPuzzle === 2) {
+              messageEl.textContent =
+                "人体模型の胃をタップしてSDカードを手に入れよう。";
+              // ここで胃タップUIは今回は無いのでメッセージだけ
+              currentPuzzle++;
+              resetInput();
+              updateScreen();
+            } else if (currentPuzzle === 3) {
+              messageEl.textContent =
+                "SDカードを入れて未送信メールを確認しよう。";
+              currentPuzzle++;
+              resetInput();
+              updateScreen();
+            } else if (currentPuzzle === 4) {
+              messageEl.textContent =
+                "未送信メールを解読し、神隠しにあった友達と再会した！\nゲームクリア！おめでとう！";
+              screenEl.textContent += "\n\n【END】";
+              inputEl.textContent = "";
+              hideKeypad();
+            }
+          }, 1200);
+        } else {
+          messageEl.textContent = "ピッ…違うようだ。";
+          setTimeout(() => {
+            messageEl.textContent = "";
+          }, 1500);
+        }
+      }
+
+      function resetInput() {
+        input = Array(5).fill("");
+        cursor = 0;
+        currentKey = null;
+        pressCount = 0;
+        updateInput();
+      }
+
+      function hideKeypad() {
+        document.getElementById("keypad").style.display = "none";
+        document.querySelector(".phone_navpad").style.display = "none";
+        document.getElementById("btn-convert").style.display = "none";
+        document.getElementById("btn-enter").style.display = "none";
+        document.getElementById("btn-clear").style.display = "none";
+        document.getElementById("btn-clear-all").style.display = "none";
+        document.getElementById("btn-left").style.display = "none";
+        document.getElementById("btn-right").style.display = "none";
+        document.getElementById("btn-up").style.display = "none";
+        document.getElementById("btn-down").style.display = "none";
+        inputEl.textContent = "";
+      }
+
+      // 遊園地画面の施設ボタン活性制御
+      function updateParkButtons() {
+        btnMerry.disabled = !unlockedAreas.has("merry");
+        btnHaunted.disabled = !unlockedAreas.has("haunted");
+        btnFerris.disabled = !unlockedAreas.has("ferris");
+      }
+
+      // ガラケー開閉切替
+      btnOpenPhone.addEventListener("click", () => {
+        parkView.style.display = "none";
+        phone.style.display = "block";
+        updateScreen();
+        resetInput();
+        messageEl.textContent = "";
+      });
+      btnClosePhone.addEventListener("click", () => {
+        phone.style.display = "none";
+        parkView.style.display = "block";
+        messageEl.textContent = "";
+      });
+
+      // 施設ボタン押下で対応謎へ
+      btnMerry.addEventListener("click", () => {
+        if (!unlockedAreas.has("merry")) return;
+        currentPuzzle = 1;
+        parkView.style.display = "none";
+        phone.style.display = "block";
+        updateScreen();
+        resetInput();
+        messageEl.textContent = "";
+      });
+      btnHaunted.addEventListener("click", () => {
+        if (!unlockedAreas.has("haunted")) return;
+        currentPuzzle = 2;
+        parkView.style.display = "none";
+        phone.style.display = "block";
+        updateScreen();
+        resetInput();
+        messageEl.textContent = "";
+      });
+      btnFerris.addEventListener("click", () => {
+        if (!unlockedAreas.has("ferris")) return;
+        currentPuzzle = 4;
+        parkView.style.display = "none";
+        phone.style.display = "block";
+        updateScreen();
+        resetInput();
+        messageEl.textContent = "";
+      });
+
+      // キーパッドイベント
+      document.querySelectorAll(".phone_btn[data-key]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          handleKeyPress(btn.dataset.key);
+        });
+      });
+      document
+        .getElementById("btn-convert")
+        .addEventListener("click", toggleInputMode);
+      document
+        .getElementById("btn-left")
+        .addEventListener("click", () => moveCursor("left"));
+      document
+        .getElementById("btn-right")
+        .addEventListener("click", () => moveCursor("right"));
+      document
+        .getElementById("btn-clear")
+        .addEventListener("click", deleteChar);
+      document
+        .getElementById("btn-clear-all")
+        .addEventListener("click", clearAll);
+      document
+        .getElementById("btn-enter")
+        .addEventListener("click", submitAnswer);
+    </script>
+  </body>
+</html>
