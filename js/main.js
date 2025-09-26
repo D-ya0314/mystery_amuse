@@ -152,7 +152,7 @@ function start(n) {
 const puzzles = [
   {
     question:
-      "この謎を解けば、この世界が動き出す。\n2×1 6×1 8×2 7×4 3×2\n\n入力: <span class='phone_input' id='input'>_ _ _ _ _</span>",
+      "この謎を解けば、この世界が動き出す。\n2×1 6×1 8×2 7×4 3×2\n\n入力: <span class='phone_input' id='input'>_ _ _ _ _</span></br></br>◎で送信",
     answer: "amuse",
   },
   {
@@ -478,7 +478,7 @@ function call() {
     callcounter = currentPuzzle;
     currentPuzzle = 99;
     screenEl.innerHTML =
-      "<span class='phone_input' id='input'>_ _ _ _ _ _</span>";
+      "<P>番号を入力してください。</p></br><span class='phone_input' id='input'>_ _ _ _ _ _</span></br></br><P>掛：電話を掛けます。</p><P>切：前の画面に戻ります。</p>";
     updateInput();
   }
   resetInput();
