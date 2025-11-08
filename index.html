@@ -159,7 +159,12 @@
       </section>
       <section id="haunted" class="l_section js_section">
         <div class="l_contents l_container-sm">
-          <p class="m_question_p">鳥居があるお化け屋敷に着いた。</p>
+          <p class="m_question_p">
+            鳥居があるお化け屋敷に着いた。<br />日本人形や人体模型などが置かれてある。
+          </p>
+          <p class="m_question_p">
+            「うっ、人体模型って内臓がむき出しで気持ち悪いんだよな...」
+          </p>
           <p class="m_question_p">鳥居に紙が貼られてある。</p>
           <div class="l_haunted_memo">
             <p class="m_question_p m_onryou_p">
@@ -185,6 +190,18 @@
           <div class="js_hint" id="hintHaunted2">
             <p class="m_question_p">「とりい」に貼られているので...</p>
           </div>
+          <div class="js_hint" id="hintHaunted3">
+            <p class="m_question_p">
+              □の文字から <span class="m_shikaku">い</span>をとって読もう。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted4">
+            <p class="m_question_p">
+              「とったもじ」と出てくる。取った文字は<span class="m_shikaku"
+                >い</span
+              >である。もう一度問題文を見てみよう、答えは？
+            </p>
+          </div>
         </div>
       </section>
       <section id="haunted2" class="l_section js_section">
@@ -196,6 +213,57 @@
           <div class="js_inonaka" id="inonaka">
             <p class="m_question_p">SDカードが入っていた。</p>
             <button class="m_btn" id="btn-sdcard">SDカードを入れる</button>
+          </div>
+          <button
+            class="m_btn js_hint"
+            onclick="openhint('haunted2p')"
+            id="btn-hintHaunted2-paper"
+          >
+            鳥居の張り紙を見る
+          </button>
+          <div class="l_haunted_memo js_hint" id="hintHaunted2p">
+            <p class="m_question_p m_onryou_p">
+              <span class="m_shikaku">と</span
+              ><span class="m_shikaku">っ</span>て<span class="m_maru">も</span
+              >あ<span class="m_shikaku">い</span
+              ><span class="m_shikaku">た</span
+              ><span class="m_shikaku">い</span>と
+            </p>
+            <p class="m_question_p m_onryou_p">
+              <span class="m_shikaku">も</span><span class="m_maru">ど</span
+              ><span class="m_maru">か</span>し<span class="m_shikaku">い</span
+              ><span class="m_shikaku">じ</span>ゅ<span class="m_maru">う</span
+              >ね<span class="m_maru">ん</span
+              ><span class="m_maru">だ</span>った
+            </p>
+            <p class="m_question_p m_onryou_p">TEL.1012</p>
+          </div>
+          <button
+            class="m_btn js_hint"
+            onclick="openhint('haunted2')"
+            id="btn-hintHaunted2"
+          >
+            ヒント
+          </button>
+          <div class="js_hint" id="hintHaunted21">
+            <p class="m_question_p">
+              受信メール、送信済みメール、未送信メールを確認する。未送信メールボックスの中の「Re：私と遊ボ」が入力できるようになっている。少女の名前はなんだろ...
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted22">
+            <p class="m_question_p">
+              未送信メールボックスの中の「Re：私と遊ボ」は、受信メールボックスの「私と遊ボ」に返信しようとしていたみたいだ。名前のヒントは、そのメールの中にある。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted23">
+            <p class="m_question_p">
+              「いつメール受信したかも言うんだヨ！」どうやら受信日時が重要なようだ。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted24">
+            <p class="m_question_p">
+              受信日時は、「2005/2/22 3:33」これをかなに変換してみよう。
+            </p>
           </div>
         </div>
       </section>

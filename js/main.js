@@ -172,7 +172,7 @@ const puzzles = [
   },
   {
     question:
-      "<p>2005/7/23 18:34\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんない。返信するからゆるして\n\nあなたの名前は: <span class='phone_input' id='input'>_ _ _ _ _</span>",
+      "<p>2005/7/23 18:34\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんなさい。返信するからゆるして\n\nあなたの名前は: <span class='phone_input' id='input'>_ _ _ _ _</span>",
     answer: "みう",
   },
 ];
@@ -304,13 +304,13 @@ function updateScreen() {
       return;
     } else if (mailMode === "receiveMail1") {
       screenEl.innerHTML =
-        "<p>2005/2/22 3:33\n＜From＞謎ノ少女\n＜件名＞私と遊ボ\n私ね、この前遊園地でシんじゃっタの。おバけ屋敷が崩壊シて、つぶされタの。\nかわいそうな私。それから私はこんなロウ獄みたいなところにいルの。\n電パが弱い...\n話し相手もいない...\nかなしい私と遊ボ！私の名前は何？\n６日以内にこたえテ！わからないなら４人にこのメールをまわシテ。\n\nいつ来たのかも言うんだヨ！もし無視したらね...同じ場所に来たあなたをみざる世界に連れテくね。</p>";
+        "<p>2005/2/22 3:33\n＜From＞謎ノ少女\n＜件名＞私と遊ボ\n私ね、この前遊園地でシんじゃっタの。おバけ屋敷が崩壊シて、つぶされタの。\nかわいそうな私。それから私はこんなロウ獄みたいなところにいルの。\n電パが弱い...\n話し相手もいない...\nかなしい私と遊ボ！私の名前は何？\n６日以内にこたえテ！わからないなら４人にこのメールをまわシテ。\n\nいつメール受信したかも言うんだヨ！もし無視したらね...同じ場所に来たあなたをみざる世界に連れテくね。</p>";
       return;
     } else if (mailMode === "receiveMail2") {
       screenEl.innerHTML = `<p>2015/7/23 3:20\n＜From＞謎ノ少女\n＜件名＞Re：Re：私と遊ボ\n正解！私の名前はみう！！もしかしてこの子のお友達かナ？もう遊んでくれなくなっタの。お友達の番号に電話したら、お友達、返スね。\n遊んでくれてありがとう！楽しかっタヨ...私と遊んでくれるなら、今あなタがいル場所と私のいル場所をつなげテね！！</p>`;
       return;
     } else if (mailMode === "sendMail1") {
-      screenEl.innerHTML = `<p>2015/7/23 3:20\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんない。返信するからゆるして\n\nあなたの名前は:みう</p>`;
+      screenEl.innerHTML = `<p>2015/7/23 3:20\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんなさい。返信するからゆるして\n\nあなたの名前は:みう</p>`;
       return;
     } else if (mailMode === "sendMail2") {
       screenEl.innerHTML = "<p>****</p>";
@@ -391,10 +391,10 @@ function deleteChar() {
       mailMode = "send";
       showMailboxList();
       return;
-    } else if (mailMode === "draftMail1" || mailMode === "draftMail2") {
-      mailMode = "draft";
-      showMailboxList();
-      return;
+      // } else if (mailMode === "draftMail1" || mailMode === "draftMail2") {
+      //   mailMode = "draft";
+      //   showMailboxList();
+      //   return;
     }
   }
   input[cursor] = "";
@@ -493,7 +493,16 @@ function clearAll() {
       inputMode = "alphabet";
       messageEl.textContent = `入力モード: アルファベット`;
     }
+  } else if (
+    currentPuzzle === 4 &&
+    (mailMode === "draftMail1" || mailMode === "draftMail2")
+  ) {
+    selectedMailbox = 0;
+    mailMode = "draft";
+    showMailboxList();
+    return;
   }
+
   if (currentPuzzle === 99) {
     input = Array(6).fill("");
   } else if (currentPuzzle === 1) {
@@ -505,6 +514,7 @@ function clearAll() {
   } else {
     input = Array(5).fill("");
   }
+
   cursor = 0;
   updateInput();
 }
@@ -760,13 +770,16 @@ document.getElementById("btn-inonaka").addEventListener("click", () => {
 
 // SDカードを入れる
 document.getElementById("btn-sdcard").addEventListener("click", () => {
-  document.getElementById("btn-sdcard").style.display = "none";
+  document.getElementById("btn-sdcard").classList.add("is-disable");
+  document.getElementById("btn-sdcard").textContent = "SDカードを入れた";
   currentPuzzle++;
   resetInput();
   updateScreen();
-  phone.style.display = "flex";
+  // phone.style.display = "flex";
   document.getElementById("phoneClose").play();
   document.getElementById("pon").play();
+  document.getElementById("btn-hintHaunted2-paper").classList.add("is-active");
+  document.getElementById("btn-hintHaunted2").classList.add("is-active");
 });
 
 // ヒント
@@ -782,22 +795,56 @@ function openhint(n) {
   if (n === "park") {
     const hint = document.getElementById("hintPark");
     hint.classList.toggle("is-active");
-  } else if (n === "haunted" && hintCount === 0) {
-    const hint = document.getElementById("hintHaunted1");
-    hint.classList.toggle("is-active");
-    hintCount = 1;
-  } else if (n === "haunted" && hintCount === 1) {
-    const hint = document.getElementById("hintHaunted2");
-    hint.classList.toggle("is-active");
-    hintCount = 2;
-  } else if (n === "haunted" && hintCount === 2) {
+  } else if (n === "haunted") {
     const hint1 = document.getElementById("hintHaunted1");
     const hint2 = document.getElementById("hintHaunted2");
+    const hint3 = document.getElementById("hintHaunted3");
+    const hint4 = document.getElementById("hintHaunted4");
+    if (hintCount === 0) {
+      hint1.classList.toggle("is-active");
+      hintCount = 1;
+    } else if (hintCount === 1) {
+      hint2.classList.toggle("is-active");
+      hintCount = 2;
+    } else if (hintCount === 2) {
+      hint3.classList.toggle("is-active");
+      hintCount = 3;
+    } else if (hintCount === 3) {
+      hint4.classList.toggle("is-active");
+      hintCount = 4;
+    } else if (hintCount === 4) {
+      hint1.classList.toggle("is-active");
+      hint2.classList.toggle("is-active");
+      hint3.classList.toggle("is-active");
+      hint4.classList.toggle("is-active");
+      hintCount = 0;
+    }
+  } else if (n === "haunted2p") {
+    const hint1 = document.getElementById("hintHaunted2p");
     hint1.classList.toggle("is-active");
-    hint2.classList.toggle("is-active");
-    hintCount = 0;
-  } else if (n === "r3") {
-    const hint = document.getElementById("hintRoom3");
-    hint.classList.toggle("is-active");
+  } else if (n === "haunted2") {
+    const hint1 = document.getElementById("hintHaunted21");
+    const hint2 = document.getElementById("hintHaunted22");
+    const hint3 = document.getElementById("hintHaunted23");
+    const hint4 = document.getElementById("hintHaunted24");
+    if (hintCount === 0) {
+      hint1.classList.toggle("is-active");
+      hintCount = 1;
+    } else if (hintCount === 1) {
+      hint2.classList.toggle("is-active");
+      hintCount = 2;
+    } else if (hintCount === 2) {
+      hint3.classList.toggle("is-active");
+      hintCount = 3;
+    } else if (hintCount === 3) {
+      hint4.classList.toggle("is-active");
+      hintCount = 4;
+    } else if (hintCount === 4) {
+      hint1.classList.toggle("is-active");
+      hint2.classList.toggle("is-active");
+      hint3.classList.toggle("is-active");
+      hint4.classList.toggle("is-active");
+      hintCount = 0;
+    }
   }
 }
