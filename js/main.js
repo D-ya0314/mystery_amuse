@@ -278,6 +278,7 @@ let pressCount = 0;
 let pressTimeout;
 let cursor = 0;
 let callcounter = 0;
+let hintCount = 0;
 
 // 最終謎用の変数
 let mailMode = null; // null=一覧, "draft"=未送信メール開封, "receive"=受信メールボックス
@@ -780,6 +781,7 @@ document.getElementById("btn-sdcard").addEventListener("click", () => {
   document.getElementById("pon").play();
   document.getElementById("btn-hintHaunted2-paper").classList.add("is-active");
   document.getElementById("btn-hintHaunted2").classList.add("is-active");
+  hintCount = 0;
 });
 
 // ヒント
@@ -790,7 +792,7 @@ document.getElementById("btn-sdcard").addEventListener("click", () => {
 //   });
 // }
 
-let hintCount = 0;
+
 function openhint(n) {
   if (n === "park") {
     const hint = document.getElementById("hintPark");
@@ -827,20 +829,19 @@ function openhint(n) {
     const hint2 = document.getElementById("hintHaunted22");
     const hint3 = document.getElementById("hintHaunted23");
     const hint4 = document.getElementById("hintHaunted24");
-    let hintCounter = hintCount
-    if (hintCount === hintCounter) {
+    if (hintCount === 0) {
       hint1.classList.toggle("is-active");
-      hintCount = hintCount + 1;
-    } else if (hintCount === hintCounter + 1) {
+      hintCount = 1;
+    } else if (hintCount === 1) {
       hint2.classList.toggle("is-active");
-      hintCount = hintCount + 1;
-    } else if (hintCount === hintCounter + 2) {
+      hintCount = 2;
+    } else if (hintCount === 2) {
       hint3.classList.toggle("is-active");
-      hintCount = hintCount + 1;
-    } else if (hintCount === hintCounter + 3) {
+      hintCount = 3;
+    } else if (hintCount === 3) {
       hint4.classList.toggle("is-active");
-      hintCount = hintCount + 1;
-    } else if (hintCount === hintCounter + 4) {
+      hintCount = 4;
+    } else if (hintCount === 4) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
