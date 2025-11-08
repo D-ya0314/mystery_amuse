@@ -830,16 +830,16 @@ function openhint(n) {
     let hintCounter = hintCount
     if (hintCount === hintCounter) {
       hint1.classList.toggle("is-active");
-      hintCount ++;
+      hintCount = hintCount + 1;
     } else if (hintCount === hintCounter + 1) {
       hint2.classList.toggle("is-active");
-      hintCount ++;
+      hintCount = hintCount + 1;
     } else if (hintCount === hintCounter + 2) {
       hint3.classList.toggle("is-active");
-      hintCount ++;
+      hintCount = hintCount + 1;
     } else if (hintCount === hintCounter + 3) {
       hint4.classList.toggle("is-active");
-      hintCount ++;
+      hintCount = hintCount + 1;
     } else if (hintCount === hintCounter + 4) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
