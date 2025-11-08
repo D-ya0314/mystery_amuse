@@ -827,19 +827,20 @@ function openhint(n) {
     const hint2 = document.getElementById("hintHaunted22");
     const hint3 = document.getElementById("hintHaunted23");
     const hint4 = document.getElementById("hintHaunted24");
-    if (hintCount === 0) {
+    let hintCounter = hintCount
+    if (hintCount === hintCounter) {
       hint1.classList.toggle("is-active");
-      hintCount = 1;
-    } else if (hintCount === 1) {
+      hintCount ++;
+    } else if (hintCount === hintCounter + 1) {
       hint2.classList.toggle("is-active");
-      hintCount = 2;
-    } else if (hintCount === 2) {
+      hintCount ++;
+    } else if (hintCount === hintCounter + 2) {
       hint3.classList.toggle("is-active");
-      hintCount = 3;
-    } else if (hintCount === 3) {
+      hintCount ++;
+    } else if (hintCount === hintCounter + 3) {
       hint4.classList.toggle("is-active");
-      hintCount = 4;
-    } else if (hintCount === 4) {
+      hintCount ++;
+    } else if (hintCount === hintCounter + 4) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
