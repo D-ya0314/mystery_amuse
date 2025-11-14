@@ -4,6 +4,7 @@
 const hamburger = document.querySelector(".js_hamburger");
 const navigation = document.querySelector(".js_nav");
 const body = document.querySelector(".js_body");
+let dwmkbn = 0;
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("is-active");
@@ -13,6 +14,11 @@ hamburger.addEventListener("click", () => {
     enableScroll();
   } else {
     disableScroll();
+  }
+  if (dwmkbn === 0) {
+    dwmkbn = 1;
+  } else {
+    dwmkbn = 0
   }
 });
 
@@ -63,11 +69,12 @@ window.addEventListener("scroll", () => {
 
   lastScrollY = currentScrollY;
 
-  // スクロールが止まったら 1 秒後にヘッダーを表示
+  // スクロールが止まったら 1 秒後にヘッダーを非表示
   timeout = setTimeout(() => {
-    // フッターが見えていたら表示しない
-    if (isFooterVisible) return;
+    // スクロールされていない場合は表示
     if (lastScrollY === 0) return;
+    // ドロワーメニューが開かれている場合は表示
+    if (dwmkbn === 1) return;
     header.classList.add("is-active");
   }, 1000);
 });
