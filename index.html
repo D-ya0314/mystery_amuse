@@ -50,6 +50,7 @@
       src="audio/maou_bgm_acoustic44.mp3"
       preload="auto"
     ></audio>
+    <audio id="deadBgm" src="audio/maou_bgm_piano41.mp3" preload="auto"></audio>
     <audio id="phoneCall" src="audio/phone_call.mp3" preload="auto"></audio>
     <audio id="phoneVibe" src="audio/phone_vibrator.mp3" preload="auto"></audio>
     <audio id="phoneClose" src="audio/phone_close.mp3" preload="auto"></audio>
@@ -108,12 +109,36 @@
     </header>
     <div class="start">
       <div class="l_contents l_container-sm">
-        <p>早く見つけてよ...</p>
+        <p>早く見つけテヨ...</p>
         <p>（誰だろう、）</p>
-        <p>ずっと待ってるよ、あの場所で...</p>
+        <p>ずっと待っテルヨ、あの場所で...</p>
         <p>（観覧車やメリーゴーランドがかすかに見える、、夢？）</p>
+        <br />
+        <p>
+          <button class="m_btn" onclick="openhint('example')">
+            謎の声を聞く（ヒント）
+          </button>
+          は、何度でも押せます。
+        </p>
+        <div class="js_hint" id="hintExample1">
+          <br />
+          <p>
+            よぉ！久しぶりだな。ちょっとだけホラー要素があるけどビビんじゃねーぞ？ww
+          </p>
+        </div>
+        <div class="js_hint" id="hintExample2">
+          <br />
+          <p>
+            もう一回「謎の声を聞く（ヒント）」を押したら、ちょっとしたネタばれをする。でもな、バグったときに重要なんだよ。ちょっとでもネタバレが嫌なら、「探しに行く」んだな。
+          </p>
+        </div>
+        <div class="js_hint" id="hintExample3">
+          <br />
+          <p>途中、ボタンが効いていない？って感じたら、「掛」「切」を順に押してくれ！きっと直る、、、はず</p>
+        </div>
       </div>
       <button class="m_btn" onclick="start('o')">探しに行く</button>
+      <p></p>
       <!-- <p>※メンテナンス中です。動作がうまくいかない場合があります。</p> -->
     </div>
     <!-- 黒い全画面レイヤー -->
@@ -151,9 +176,21 @@
             </p>
             <br /><br />
           </div>
-          <button class="m_btn" onclick="openhint('park')">ヒント</button>
-          <div class="js_hint" id="hintPark">
-            <p class="m_question_p">現在：2015年7月23日　丑三つ時</p>
+          <button class="m_btn" onclick="openhint('park')">
+            謎の声を聞く（ヒント）
+          </button>
+          <div class="js_hint" id="hintPark1">
+            <p class="m_question_p">
+              今は、2015年7月23日　丑三つ時だ！
+            </p>
+          </div>
+          <div class="js_hint" id="hintPark2">
+            <p class="m_question_p">①事件は10年前だったな...懐かしい</p>
+          </div>
+          <div class="js_hint" id="hintPark3">
+            <p class="m_question_p">
+              ②丑三つ時は、2時から2時半だよ！そんなことも知らねぇの？笑
+            </p>
           </div>
         </div>
       </section>
@@ -183,23 +220,32 @@
             </p>
             <p class="m_question_p m_onryou_p">TEL.1012</p>
           </div>
-          <button class="m_btn" onclick="openhint('haunted')">ヒント</button>
+          <button class="m_btn" onclick="openhint('haunted')">
+            謎の声を聞く（ヒント）
+          </button>
           <div class="js_hint" id="hintHaunted1">
-            <p class="m_question_p">□の文字を順番に読もう。</p>
+            <p class="m_question_p">□の文字を順番に読んでみよう！</p>
           </div>
           <div class="js_hint" id="hintHaunted2">
-            <p class="m_question_p">「とりい」に貼られているので...</p>
+            <p class="m_question_p">「とりい」に貼られているから...</p>
           </div>
           <div class="js_hint" id="hintHaunted3">
             <p class="m_question_p">
-              □の文字から <span class="m_shikaku">い</span>をとって読もう。
+              □の文字から
+              <span class="m_shikaku">い</span>をとって読めばいいんだ！
             </p>
           </div>
           <div class="js_hint" id="hintHaunted4">
             <p class="m_question_p">
-              「とったもじ」と出てくる。取った文字は<span class="m_shikaku"
+              「とったもじ」って出てきたな。取った文字は<span class="m_shikaku"
                 >い</span
-              >である。もう一度問題文を見てみよう、答えは？
+              >...。もう一回問題文を見たらわかるかも。※次は答えです
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted5">
+            <p class="m_question_p">
+              問題文の□に、取った文字の<span class="m_shikaku">い</span
+              >を入れて、答えは「いのなか」だ！<br />そういえばSDカード、口の中に投げ入れたな。
             </p>
           </div>
         </div>
@@ -243,26 +289,52 @@
             onclick="openhint('haunted2')"
             id="btn-hintHaunted2"
           >
-            ヒント
+            謎の声を聞く（ヒント）
           </button>
           <div class="js_hint" id="hintHaunted21">
             <p class="m_question_p">
-              受信メール、送信済みメール、未送信メールを確認する。未送信メールボックスの中の「Re：私と遊ボ」が入力できるようになっている。少女の名前はなんだろ...
+              「Re：私と遊ボ」は、「私と遊ボ」に返信しようとしたんだ。迷惑なチェーンメールだなって、思ってたんだよ。ガチで連れてかれたわww<br />名前のヒントは、そのメールの中にあるはずだ。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted22">
             <p class="m_question_p">
-              未送信メールボックスの中の「Re：私と遊ボ」は、受信メールボックスの「私と遊ボ」に返信しようとしていたみたいだ。名前のヒントは、そのメールの中にある。
+              「いつメール受信したかも言うんだヨ！」か、、、受信日時が重要なようだね。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted23">
             <p class="m_question_p">
-              「いつメール受信したかも言うんだヨ！」どうやら受信日時が重要なようだ。
+              受信日時は、「2005/2/22 3:33」これをかなに変換してみようぜ！
             </p>
           </div>
           <div class="js_hint" id="hintHaunted24">
             <p class="m_question_p">
-              受信日時は、「2005/2/22 3:33」これをかなに変換してみよう。
+              「2005/2/22
+              3:33」の数字を携帯でかな入力すると、「かをなくす」だな！
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted25">
+            <p class="m_question_p">
+              知ってたか？「掛/出」を押すと電話を掛けることができるんだぜ。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted26">
+            <p class="m_question_p">
+              当時はメールの縦読みとか流行ってたよな。※次は縦読み後のヒントです。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted27">
+            <p class="m_question_p">
+              電話番号「64」で掛けてみろ！きっとあの女が電話にでるよ。※音声が流れない場合は、不具合です。管理者に問い合わせてくだせぇです。次のヒントで名前が載っています。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted28">
+            <p class="m_question_p">
+              あいつの名前、「みう」っていうんだな。未送信メールに入力して送信してくれ。※すぐに新規メールを受信するので、そのメールの指示に従おう。
+            </p>
+          </div>
+          <div class="js_hint" id="hintHaunted29">
+            <p class="m_question_p">
+              早く俺に電話を掛けてこい！...おい、、、名前忘れたのか！？「辰巳」だよ！！※ヒントは終了です。デッドエンドもあるのでチャレンジしやがれです！（分岐は最後のみ）
             </p>
           </div>
         </div>
