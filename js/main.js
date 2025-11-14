@@ -152,7 +152,7 @@ function start(n) {
 const puzzles = [
   {
     question:
-      "この謎を解けば、この世界が動き出す。\n2×1 6×1 8×2 7×4 3×2\n\n入力: <span class='phone_input' id='input'>_ _ _ _ _</span></br></br>◎で送信",
+      "この謎を解けば、この世界が動き出す。\n2×1 6×1 8×2 7×4 3×2\n\n入力: <span class='phone_input' id='input'>_ _ _ _ _</span></br></br>◎：送信",
     answer: "amuse",
   },
   {
@@ -172,7 +172,7 @@ const puzzles = [
   },
   {
     question:
-      "<p>2005/7/23 18:34\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんなさい。返信するからゆるして\n\nあなたの名前は: <span class='phone_input' id='input'>_ _ _ _ _</span>",
+      "<p>2005/7/23 18:34\n＜To＞謎ノ少女\n＜件名＞Re：私と遊ボ\n今まで無視してごめんなさい。返信するからゆるして\n\nあなたの名前は: <span class='phone_input' id='input'>_ _ _ _ _</span></p>\n\n\n<p>◎：送信\n切：前の画面に戻る</p>",
     answer: "みう",
   },
 ];
@@ -221,6 +221,7 @@ function showMailboxList() {
       }
     });
   }
+  html += " \n\n\n<p>◎：決定\nクリア：前の画面に戻る</p>"
   screenEl.innerHTML = html;
 }
 
@@ -318,7 +319,7 @@ function updateScreen() {
       return;
     } else if (mailMode === "draftMail1") {
       screenEl.innerHTML =
-        "<p>2005/7/23 18:36\n＜To＞母ちゃん\n＜件名＞助けて\n母ちゃん助けて！あいつにつれてか\n\n\n☆Tatumi☆</p>";
+        "<p>2005/7/23 18:36\n＜To＞母ちゃん\n＜件名＞助けて\n母ちゃん助けて！あいつにつれてか\n\n\n☆Tatumi☆</p>\n\n\n<p>切：前の画面に戻る</p>";
       return;
     } else if (mailMode === "draftMail2") {
       screenEl.innerHTML = puzzles[currentPuzzle].question;
@@ -421,6 +422,16 @@ function call() {
         setTimeout(() => {
           hauntedBgm.play();
         }, 13000);
+      }else if (input.join("") === "1012") {
+        hauntedBgm.pause();
+        tototo.play();
+        setTimeout(() => {
+          pipipi.play();
+        }, 2000);
+        setTimeout(() => {
+          hauntedBgm.play();
+          messageEl.textContent = "誰も出ない..."
+        }, 7000);        
       } else if (input.join("") === "56") {
         hauntedBgm.pause();
         tototo.play();
@@ -468,6 +479,9 @@ function call() {
           setTimeout(() => {
             document.getElementById("miuE").play();
           }, 10000);
+          setTimeout(() => {
+            document.getElementById("deadBgm").play();
+          }, 11000);
         }, 7000);
       } else {
         messageEl.textContent = "その電話番号は現在使用されていません。";
@@ -479,7 +493,7 @@ function call() {
     callcounter = currentPuzzle;
     currentPuzzle = 99;
     screenEl.innerHTML =
-      "<P>番号を入力してください。</p></br><span class='phone_input' id='input'>_ _ _ _ _ _</span></br></br><P>掛：電話を掛けます。</p><P>切：前の画面に戻ります。</p>";
+      "<P>番号を入力してください。</p></br><span class='phone_input' id='input'>_ _ _ _ _ _</span></br></br><P>掛：電話を掛ける</p><P>切：前の画面に戻る</p>";
     updateInput();
   }
   resetInput();
@@ -794,14 +808,50 @@ document.getElementById("btn-sdcard").addEventListener("click", () => {
 
 
 function openhint(n) {
-  if (n === "park") {
-    const hint = document.getElementById("hintPark");
-    hint.classList.toggle("is-active");
+  if (n === "example") {
+    const hint1 = document.getElementById("hintExample1");
+    const hint2 = document.getElementById("hintExample2");
+    const hint3 = document.getElementById("hintExample3");
+    if (hintCount === 0) {
+      hint1.classList.toggle("is-active");
+      hintCount = 1;
+    } else if (hintCount === 1) {
+      hint2.classList.toggle("is-active");
+      hintCount = 2;
+    } else if (hintCount === 2) {
+      hint3.classList.toggle("is-active");
+      hintCount = 3;
+    } else if (hintCount === 3) {
+      hint1.classList.toggle("is-active");
+      hint2.classList.toggle("is-active");
+      hint3.classList.toggle("is-active");
+      hintCount = 0;
+    }
+  } else if (n === "park") {
+    const hint1 = document.getElementById("hintPark1");
+    const hint2 = document.getElementById("hintPark2");
+    const hint3 = document.getElementById("hintPark3");
+    if (hintCount === 0) {
+      hint1.classList.toggle("is-active");
+      hintCount = 1;
+    } else if (hintCount === 1) {
+      hint2.classList.toggle("is-active");
+      hintCount = 2;
+    } else if (hintCount === 2) {
+      hint3.classList.toggle("is-active");
+      hintCount = 3;
+    } else if (hintCount === 3) {
+      hint1.classList.toggle("is-active");
+      hint2.classList.toggle("is-active");
+      hint3.classList.toggle("is-active");
+      hintCount = 0;
+    }
   } else if (n === "haunted") {
     const hint1 = document.getElementById("hintHaunted1");
     const hint2 = document.getElementById("hintHaunted2");
     const hint3 = document.getElementById("hintHaunted3");
     const hint4 = document.getElementById("hintHaunted4");
+    const hint5 = document.getElementById("hintHaunted5");
     if (hintCount === 0) {
       hint1.classList.toggle("is-active");
       hintCount = 1;
@@ -815,10 +865,14 @@ function openhint(n) {
       hint4.classList.toggle("is-active");
       hintCount = 4;
     } else if (hintCount === 4) {
+      hint4.classList.toggle("is-active");
+      hintCount = 5;
+    } else if (hintCount === 5) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
       hint4.classList.toggle("is-active");
+      hint5.classList.toggle("is-active");
       hintCount = 0;
     }
   } else if (n === "haunted2p") {
@@ -829,6 +883,11 @@ function openhint(n) {
     const hint2 = document.getElementById("hintHaunted22");
     const hint3 = document.getElementById("hintHaunted23");
     const hint4 = document.getElementById("hintHaunted24");
+    const hint5 = document.getElementById("hintHaunted25");
+    const hint6 = document.getElementById("hintHaunted26");
+    const hint7 = document.getElementById("hintHaunted27");
+    const hint8 = document.getElementById("hintHaunted28");
+    const hint9 = document.getElementById("hintHaunted29");
     if (hintCount === 0) {
       hint1.classList.toggle("is-active");
       hintCount = 1;
@@ -842,10 +901,30 @@ function openhint(n) {
       hint4.classList.toggle("is-active");
       hintCount = 4;
     } else if (hintCount === 4) {
+      hint5.classList.toggle("is-active");
+      hintCount = 5;
+    } else if (hintCount === 5) {
+      hint6.classList.toggle("is-active");
+      hintCount = 6;
+    }  else if (hintCount === 6) {
+      hint7.classList.toggle("is-active");
+      hintCount = 7
+    }  else if (hintCount === 7) {
+      hint8.classList.toggle("is-active");
+      hintCount = 8;
+    }  else if (hintCount === 8) {
+      hint9.classList.toggle("is-active");
+      hintCount = 9;
+    }  else if (hintCount === 9) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
       hint4.classList.toggle("is-active");
+      hint5.classList.toggle("is-active");
+      hint6.classList.toggle("is-active");
+      hint7.classList.toggle("is-active");
+      hint8.classList.toggle("is-active");
+      hint9.classList.toggle("is-active");
       hintCount = 0;
     }
   }
