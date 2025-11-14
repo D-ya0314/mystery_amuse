@@ -622,6 +622,7 @@ function submitAnswer() {
       // 次のセクションへ
       document.getElementById("inPark").classList.remove("is-active");
       document.getElementById("park").classList.add("is-active");
+      hintCount = 0;
     } else if (currentPuzzle === 1) {
       phone.style.display = "none";
       amuseBgm.pause();
@@ -633,6 +634,7 @@ function submitAnswer() {
       // 次のセクションへ
       document.getElementById("park").classList.remove("is-active");
       document.getElementById("haunted").classList.add("is-active");
+      hintCount = 0;
     } else if (currentPuzzle === 2) {
       phone.style.display = "none";
       currentPuzzle++;
