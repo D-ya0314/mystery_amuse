@@ -865,7 +865,7 @@ function openhint(n) {
       hint4.classList.toggle("is-active");
       hintCount = 4;
     } else if (hintCount === 4) {
-      hint4.classList.toggle("is-active");
+      hint5.classList.toggle("is-active");
       hintCount = 5;
     } else if (hintCount === 5) {
       hint1.classList.toggle("is-active");
