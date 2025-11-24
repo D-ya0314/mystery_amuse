@@ -420,25 +420,33 @@ function call() {
     if (callcounter >= 2) {
       if (input.join("") === "64") {
         hauntedBgm.pause();
+        // tototo.play();
+        // setTimeout(() => {
+        //   pipipi.play();
+        // }, 2000);
+        // setTimeout(() => {
+        //   miuF
+        //     .play()
+        //     .then(() => {
+        //       console.log("miuF Played OK");
+        //     })
+        //     .catch((e) => {
+        //       console.warn("miuF Error:", e);
+        //     });
+        // }, 7000);
+        // setTimeout(() => {
+        //   hauntedBgm.play();
+        // }, 13000);
         tototo.play();
-        setTimeout(() => {
+        tototo.onended = () => {
           pipipi.play();
-        }, 2000);
-        setTimeout(() => {
-          miuF.currentTime = 0;
-          miuF.load(); // ← Safariで必要な場合あり
-          miuF
-            .play()
-            .then(() => {
-              console.log("miuF Played OK");
-            })
-            .catch((e) => {
-              console.warn("miuF Error:", e);
-            });
-        }, 7000);
-        setTimeout(() => {
-          hauntedBgm.play();
-        }, 13000);
+          pipipi.onended = () => {
+            miuF.play();
+            miuF.onended = () => {
+              hauntedBgm.play();
+            };
+          };
+        };
       } else if (input.join("") === "1012") {
         hauntedBgm.pause();
         tototo.play();
