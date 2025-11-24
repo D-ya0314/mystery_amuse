@@ -413,6 +413,7 @@ function deleteChar() {
 function call() {
   const tototo = document.getElementById("tototo");
   const pipipi = document.getElementById("pipipi");
+  const miuF = document.getElementById("miuF");
   inputMode = "number";
   messageEl.textContent = `入力モード: 数字`;
   if (currentPuzzle === 99) {
@@ -424,7 +425,7 @@ function call() {
           pipipi.play();
         }, 2000);
         setTimeout(() => {
-          document.getElementById("miuF").play();
+          miuF.play();
         }, 7000);
         setTimeout(() => {
           hauntedBgm.play();
