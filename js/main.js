@@ -18,7 +18,7 @@ hamburger.addEventListener("click", () => {
   if (dwmkbn === 0) {
     dwmkbn = 1;
   } else {
-    dwmkbn = 0
+    dwmkbn = 0;
   }
 });
 
@@ -228,7 +228,7 @@ function showMailboxList() {
       }
     });
   }
-  html += " \n\n\n<p>◎：決定\nクリア：前の画面に戻る</p>"
+  html += " \n\n\n<p>◎：決定\nクリア：前の画面に戻る</p>";
   screenEl.innerHTML = html;
 }
 
@@ -425,12 +425,21 @@ function call() {
           pipipi.play();
         }, 2000);
         setTimeout(() => {
-          miuF.play();
+          miuF.currentTime = 0;
+          miuF.load(); // ← Safariで必要な場合あり
+          miuF
+            .play()
+            .then(() => {
+              console.log("miuF Played OK");
+            })
+            .catch((e) => {
+              console.warn("miuF Error:", e);
+            });
         }, 7000);
         setTimeout(() => {
           hauntedBgm.play();
         }, 13000);
-      }else if (input.join("") === "1012") {
+      } else if (input.join("") === "1012") {
         hauntedBgm.pause();
         tototo.play();
         setTimeout(() => {
@@ -438,8 +447,8 @@ function call() {
         }, 2000);
         setTimeout(() => {
           hauntedBgm.play();
-          messageEl.textContent = "誰も出ない..."
-        }, 7000);        
+          messageEl.textContent = "誰も出ない...";
+        }, 7000);
       } else if (input.join("") === "56") {
         hauntedBgm.pause();
         tototo.play();
@@ -816,7 +825,6 @@ document.getElementById("btn-sdcard").addEventListener("click", () => {
 //   });
 // }
 
-
 function openhint(n) {
   if (n === "example") {
     const hint1 = document.getElementById("hintExample1");
@@ -916,16 +924,16 @@ function openhint(n) {
     } else if (hintCount === 5) {
       hint6.classList.toggle("is-active");
       hintCount = 6;
-    }  else if (hintCount === 6) {
+    } else if (hintCount === 6) {
       hint7.classList.toggle("is-active");
-      hintCount = 7
-    }  else if (hintCount === 7) {
+      hintCount = 7;
+    } else if (hintCount === 7) {
       hint8.classList.toggle("is-active");
       hintCount = 8;
-    }  else if (hintCount === 8) {
+    } else if (hintCount === 8) {
       hint9.classList.toggle("is-active");
       hintCount = 9;
-    }  else if (hintCount === 9) {
+    } else if (hintCount === 9) {
       hint1.classList.toggle("is-active");
       hint2.classList.toggle("is-active");
       hint3.classList.toggle("is-active");
