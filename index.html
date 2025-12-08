@@ -164,6 +164,10 @@
               事件があったあの日、神隠しにあった友達のガラケーが落ちていた、、、
             </p>
           </div>
+          <button class="m_btn" onclick="openPhone()" id="btn-openPhone">
+            ガラケーを開く
+          </button>
+          <button class="m_btn" onclick="passQuestion()">この謎をパス</button>
         </div>
       </section>
       <section id="park" class="l_section js_section">
@@ -178,8 +182,14 @@
             </p>
             <br /><br />
           </div>
+          <button class="m_btn" onclick="openPhone()" id="btn-openPhone">
+            ガラケーを開く
+          </button>
           <button class="m_btn" onclick="openhint('park')">
             謎の声を聞く（ヒント）
+          </button>
+          <button class="m_btn" onclick="passQuestion()" id="btn-pass">
+            この謎をパス
           </button>
           <div class="js_hint" id="hintPark1">
             <p class="m_question_p">今は、2015年7月23日　丑三つ時だ！</p>
@@ -220,9 +230,13 @@
             </p>
             <p class="m_question_p m_onryou_p">TEL.1012</p>
           </div>
+          <button class="m_btn" onclick="openPhone()" id="btn-openPhone">
+            ガラケーを開く
+          </button>
           <button class="m_btn" onclick="openhint('haunted')">
             謎の声を聞く（ヒント）
           </button>
+          <button class="m_btn" onclick="passQuestion()">この謎をパス</button>
           <div class="js_hint" id="hintHaunted1">
             <p class="m_question_p">□の文字を順番に読んでみよう！</p>
           </div>
@@ -260,6 +274,7 @@
             <p class="m_question_p">SDカードが入っていた。</p>
             <button class="m_btn" id="btn-sdcard">SDカードを入れる</button>
           </div>
+          
           <button
             class="m_btn js_hint"
             onclick="openhint('haunted2p')"
@@ -284,6 +299,9 @@
             </p>
             <p class="m_question_p m_onryou_p">TEL.1012</p>
           </div>
+          <button class="m_btn" onclick="openPhone()" id="btn-openPhone">
+            ガラケーを開く
+          </button>
           <button
             class="m_btn js_hint"
             onclick="openhint('haunted2')"
@@ -298,43 +316,42 @@
           </div>
           <div class="js_hint" id="hintHaunted22">
             <p class="m_question_p">
-              「いつメール受信したかも言うんだヨ！」か、、、受信日時が重要なようだね。
+              んー、先頭があやしいな...
             </p>
           </div>
           <div class="js_hint" id="hintHaunted23">
             <p class="m_question_p">
-              受信日時は、「2005/2/22 3:33」これをかなに変換してみようぜ！
+              当時はメールの縦読みとか流行ってたよな。※次は縦読み後のヒントです。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted24">
             <p class="m_question_p">
-              「2005/2/22
-              3:33」の数字を携帯でかな入力すると、「かをなくす」だな！
+              知ってたか？「掛/出」を押すと電話を掛けることができるんだぜ。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted25">
             <p class="m_question_p">
-              当時はメールの縦読みとか流行ってたよな。※次は縦読み後のヒントです。
+              電話番号「64」で掛けてみろ！きっとあの女が電話にでるはずだ。※音声が流れない場合は、不具合です。頑張って管理者に伝えてくれ。次のヒントで名前が載っています。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted26">
             <p class="m_question_p">
-              知ってたか？「掛/出」を押すと電話を掛けることができるんだぜ。
+              あいつの名前、「みう」っていうんだな。未送信メールに入力して送信してくれ。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted27">
             <p class="m_question_p">
-              電話番号「64」で掛けてみろ！きっとあの女が電話にでるよ。※音声が流れない場合は、不具合です。管理者に問い合わせてくだせぇです。次のヒントで名前が載っています。
+              お、新しくメールを受信しているみたいだぞ。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted28">
             <p class="m_question_p">
-              あいつの名前、「みう」っていうんだな。未送信メールに入力して送信してくれ。※すぐに新規メールを受信するので、そのメールの指示に従おう。
+              俺に電話を掛けたらここから出れるのか！？早く俺に電話を掛けてこい！！
             </p>
           </div>
           <div class="js_hint" id="hintHaunted29">
             <p class="m_question_p">
-              早く俺に電話を掛けてこい！...おい、、、名前忘れたのか！？「辰巳」だよ！！※ヒントは終了です。デッドエンドもあるのでチャレンジしやがれです！（分岐は最後のみ）
+              ...おい、、、名前忘れたのか！？「辰巳」だよ！！※ヒントは終了です。デッドエンドもあるのでチャレンジしやがれ！（分岐は最後のみ）
             </p>
           </div>
         </div>
@@ -384,11 +401,10 @@
           <p class="m_question_p">
             この少女が飽きるまで、抜け出せないんだろうな。
           </p>
-          <p class="m_question_p">あの白骨化したこどもと同じように、、、キレイな骨だな</p>
+          <p class="m_question_p">
+            あの白骨化したこどもと同じように、、、キレイな骨だな
+          </p>
         </div>
-      </section>
-      <section class="l_contents l_container-sm">
-        <button class="m_btn" id="btn-openPhone">ガラケーを開く</button>
       </section>
       <div class="l_phone_box">
         <div class="phone" id="phone">
@@ -438,7 +454,7 @@
       </div>
     </main>
 
-    <div class="l_contents l_container-sm">
+    <div class="l_container-sm">
       <p>※上下グレーのヘッダー・フッターは、謎解きに使用しません。</p>
     </div>
     <footer class="l_footer">

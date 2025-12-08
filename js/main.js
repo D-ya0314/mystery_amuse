@@ -313,7 +313,7 @@ function updateScreen() {
       return;
     } else if (mailMode === "receiveMail1") {
       screenEl.innerHTML =
-        "<p>2005/2/22 3:33\n＜From＞謎ノ少女\n＜件名＞私と遊ボ\n私ね、この前遊園地でシんじゃっタの。おバけ屋敷が崩壊シて、つぶされタの。\nかわいそうな私。それから私はこんなロウ獄みたいなところにいルの。\n電パが弱い...\n話し相手もいない...\nかなしい私と遊ボ！私の名前は何？\n６日以内にこたえテ！わからないなら４人にこのメールをまわシテ。\n\nいつメール受信したかも言うんだヨ！もし無視したらね...同じ場所に来たあなたをみざる世界に連れテくね。</p>";
+        "<p>2005/2/22 3:33\n＜From＞謎ノ少女\n＜件名＞私と遊ボ\n私ね、この前遊園地でシんじゃっタの。おバけ屋敷が崩壊シて、つぶされタの。\n口から内ゾうがでちゃっタの\nでもね、まだね、いっぱいお友達と色んなことしタいの。お泊まりして、恋話したり、放課後一緒に帰ロって声を掛けられタり！あ、私の名前当ててみテ？\n６日以内にこたえテ！わからないなら４人にこのメールをまわシテ。\n\nもし無視しタらね...同じ場所に来タあなたを‘みざる’世界に連れテくね。</p>";
       return;
     } else if (mailMode === "receiveMail2") {
       screenEl.innerHTML = `<p>2015/7/23 3:20\n＜From＞謎ノ少女\n＜件名＞Re：Re：私と遊ボ\n正解！私の名前はみう！！もしかしてこの子のお友達かナ？もう遊んでくれなくなっタの。お友達の番号に電話したら、お友達、返スね。\n遊んでくれてありがとう！楽しかっタヨ...私と遊んでくれるなら、今あなタがいル場所と私のいル場所をつなげテね！！</p>`;
@@ -420,47 +420,46 @@ function call() {
     if (callcounter >= 2) {
       if (input.join("") === "64") {
         hauntedBgm.pause();
-        // tototo.play();
-        // setTimeout(() => {
-        //   pipipi.play();
-        // }, 2000);
-        // setTimeout(() => {
-        //   miuF
-        //     .play()
-        //     .then(() => {
-        //       console.log("miuF Played OK");
-        //     })
-        //     .catch((e) => {
-        //       console.warn("miuF Error:", e);
-        //     });
-        // }, 7000);
-        // setTimeout(() => {
-        //   hauntedBgm.play();
-        // }, 13000);
-        tototo.play();
-        tototo.onended = () => {
-          pipipi.play();
-          pipipi.onended = () => {
-            miuF.play();
-            miuF.onended = () => {
-              hauntedBgm.play();
-            };
-          };
-        };
-      } else if (input.join("") === "1012") {
-        hauntedBgm.pause();
+        tototo.load();
         tototo.play();
         setTimeout(() => {
+          pipipi.load();
           pipipi.play();
         }, 2000);
         setTimeout(() => {
+          miuF.load();
+          miuF
+            .play()
+            .then(() => {
+              console.log("miuF Played OK");
+            })
+            .catch((e) => {
+              console.warn("miuF Error:", e);
+            });
+        }, 7000);
+        setTimeout(() => {
+          hauntedBgm.load();
+          hauntedBgm.play();
+        }, 13000);
+      } else if (input.join("") === "1012") {
+        hauntedBgm.pause();
+        tototo.load();
+        tototo.play();
+        setTimeout(() => {
+          pipipi.load();
+          pipipi.play();
+        }, 2000);
+        setTimeout(() => {
+          hauntedBgm.load();
           hauntedBgm.play();
           messageEl.textContent = "誰も出ない...";
         }, 7000);
       } else if (input.join("") === "56") {
         hauntedBgm.pause();
+        tototo.load();
         tototo.play();
         setTimeout(() => {
+          pipipi.load();
           pipipi.play();
         }, 2000);
         setTimeout(() => {
@@ -477,8 +476,10 @@ function call() {
         }, 7000);
       } else if (input.join("") === "101269" || input.join("") === "691012") {
         hauntedBgm.pause();
+        tototo.load();
         tototo.play();
         setTimeout(() => {
+          pipipi.load();
           pipipi.play();
         }, 2000);
         setTimeout(() => {
@@ -766,12 +767,12 @@ function resetInput() {
 }
 
 // ガラケー開閉切替
-btnOpenPhone.addEventListener("click", () => {
+function openPhone() {
   phone.style.display = "flex";
   document.getElementById("phoneClose").play();
   updateScreen();
   messageEl.textContent = "";
-});
+};
 btnClosePhone.addEventListener("click", () => {
   phone.style.display = "none";
   document.getElementById("phoneClose").play();
@@ -954,4 +955,18 @@ function openhint(n) {
       hintCount = 0;
     }
   }
+}
+
+// 謎をとばすボタン処理
+function passQuestion() {
+  updateScreen();
+  messageEl.textContent = "";
+  if (currentPuzzle === 0) {
+    input = "amuse".split("");
+  } else if (currentPuzzle === 1) {
+    input = "とりい".split("");
+  } else if (currentPuzzle === 2) {
+    input = "いのなか".split("");
+  }
+  submitAnswer();
 }
