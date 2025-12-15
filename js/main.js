@@ -326,7 +326,7 @@ function updateScreen() {
       return;
     } else if (mailMode === "draftMail1") {
       screenEl.innerHTML =
-        "<p>2005/7/23 18:36\n＜To＞母ちゃん\n＜件名＞助けて\n母ちゃん助けて！あいつにつれてか\n\n\n☆Tatumi☆</p>\n\n\n<p>切：前の画面に戻る</p>";
+        "<p>2005/7/23 18:36\n＜To＞母ちゃん\n＜件名＞助けて\n母ちゃん助けて！あいつに連れてかれる。急に女の子が現れて俺を探してるんだ...今お化け屋敷の鳥居にいるから来て！人体模型の影に隠れてる。他の人は何人か連れてかれた。俺には見えないどこか違う世界に、、、\n女の子の声が聞こえてきた！早くた\n\n\n☆Tatumi☆</p>\n\n\n<p>切：前の画面に戻る</p>";
       return;
     } else if (mailMode === "draftMail2") {
       screenEl.innerHTML = puzzles[currentPuzzle].question;
@@ -419,6 +419,7 @@ function call() {
   if (currentPuzzle === 99) {
     if (callcounter >= 2) {
       if (input.join("") === "64") {
+        const callP = document.getElementById("call64");
         hauntedBgm.pause();
         tototo.load();
         tototo.play();
@@ -427,6 +428,7 @@ function call() {
           pipipi.play();
         }, 2000);
         setTimeout(() => {
+          callP.classList.remove("is-disable");
           miuF.load();
           miuF
             .play()
@@ -438,6 +440,7 @@ function call() {
             });
         }, 7000);
         setTimeout(() => {
+          callP.classList.add("is-disable");
           hauntedBgm.load();
           hauntedBgm.play();
         }, 13000);

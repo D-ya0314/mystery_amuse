@@ -16,7 +16,7 @@
   --gray-color02: #fafafa;
   --gray-color03: #aaaaaa7e;
   --primary-color: #ffe0e0;
-  --accent-color: #980000;
+  --accent-color: #2e012e;
 }
 
 :root {
@@ -539,8 +539,8 @@ body {
   border-bottom: solid 1px;
 }
 
-.m_p {
-  margin-top: 16px;
+.m_p-w {
+  color: var(--white-color);
 }
 
 /* ---------- Start ---------- */
@@ -630,6 +630,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: var(--z-index-modal);
 }
 
 .l_modal.is-disable {
@@ -637,7 +638,7 @@ body {
 }
 
 .l_modal_content {
-  background: white;
+  background: var(--accent-color);
   padding: 2em;
   border-radius: 10px;
   width: 400px;

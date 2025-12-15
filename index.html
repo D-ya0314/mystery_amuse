@@ -140,7 +140,10 @@
         </div>
       </div>
       <button class="m_btn" onclick="start('o')">探しに行く</button>
-      <p></p>
+      <p><br /></p>
+      <p>
+        ※Safari の場合、一部音声が再生されない可能性があります。<br />謎解きに必要な音声は文字で表示されますので、問題なくお楽しみいただけます。
+      </p>
       <!-- <p>※メンテナンス中です。動作がうまくいかない場合があります。</p> -->
     </div>
     <!-- 黒い全画面レイヤー -->
@@ -274,7 +277,7 @@
             <p class="m_question_p">SDカードが入っていた。</p>
             <button class="m_btn" id="btn-sdcard">SDカードを入れる</button>
           </div>
-          
+
           <button
             class="m_btn js_hint"
             onclick="openhint('haunted2p')"
@@ -315,9 +318,7 @@
             </p>
           </div>
           <div class="js_hint" id="hintHaunted22">
-            <p class="m_question_p">
-              んー、先頭があやしいな...
-            </p>
+            <p class="m_question_p">んー、先頭があやしいな...</p>
           </div>
           <div class="js_hint" id="hintHaunted23">
             <p class="m_question_p">
@@ -331,7 +332,7 @@
           </div>
           <div class="js_hint" id="hintHaunted25">
             <p class="m_question_p">
-              電話番号「64」で掛けてみろ！きっとあの女が電話にでるはずだ。※音声が流れない場合は、不具合です。頑張って管理者に伝えてくれ。次のヒントで名前が載っています。
+              電話番号「64」で掛けてみろ！きっとあの女が電話にでるはずだ。※音声が再生されない場合は、不具合です。表示されている文字と同様のセリフが再生されています。
             </p>
           </div>
           <div class="js_hint" id="hintHaunted26">
@@ -353,6 +354,13 @@
             <p class="m_question_p">
               ...おい、、、名前忘れたのか！？「辰巳」だよ！！※ヒントは終了です。デッドエンドもあるのでチャレンジしやがれ！（分岐は最後のみ）
             </p>
+          </div>
+          <div id="call64" class="l_modal is-disable">
+            <div class="l_modal_content">
+              <p class="m_p-w">
+                もしもし、私「みう」、久々に電話が来て嬉しいよ！メール待ってるね...
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -383,12 +391,6 @@
           <p class="m_question_p m_onryou_p">一緒に遊ぼ？</p>
           <p class="m_question_p m_onryou_p">いっかい、、潰れてみる？</p>
           <p class="m_question_p"><span class="m_onryou_p">ｷｬﾊｯ</span>♡</p>
-          <a
-            class="m_annke m_onryou_p"
-            href="https://docs.google.com/forms/d/e/1FAIpQLScHGvy5Ne0hS3HJCmtEDgjBmF8Ph4e_uFLDRcxJVGEQU3az1A/viewform?usp=header"
-            >アンケート書かないと、迎えにいくね<br /><br /><br
-          /></a>
-          <!-- <a href="explanation.html" class="m_annke">解説</a> -->
           <p class="m_question_p">
             電話を掛けた後、気づいたら「みう（巳卯）」が目の前にいた。
           </p>
@@ -404,6 +406,13 @@
           <p class="m_question_p">
             あの白骨化したこどもと同じように、、、キレイな骨だな
           </p>
+          <br /><br /><br />
+          <a
+            class="m_annke m_onryou_p"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScHGvy5Ne0hS3HJCmtEDgjBmF8Ph4e_uFLDRcxJVGEQU3az1A/viewform?usp=header"
+            >アンケート書かないと、迎えにいくね<br /><br
+          /></a>
+          <!-- <a href="explanation.html" class="m_annke">解説</a> -->
         </div>
       </section>
       <div class="l_phone_box">
