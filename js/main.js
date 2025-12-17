@@ -95,7 +95,7 @@ const observer = new IntersectionObserver(
   },
   {
     root: null, // ビューポート（画面）基準
-    threshold: 0.1, // 10% 見えたら発動
+    threshold: 0.2, // 10% 見えたら発動
   }
 );
 
